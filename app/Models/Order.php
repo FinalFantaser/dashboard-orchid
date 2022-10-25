@@ -33,15 +33,6 @@ class Order extends Model
     public const STATUS_NEW = 'new'; //Такой лид уже есть в БД, и это последнее его вхождение
     public const STATUS_REPEAT = 'repeat'; //Повтор данный лид уже присутствует в БД, но есть более новый
     public const STATUS_FIRST = 'first'; //Первое вхождение лида (без ранних повторов)
-
-    public static function add($name, $phone)
-    {
-        return self::create([
-            'name' => $name,
-            'phone' => $phone,
-            'status' => self::STATUS_NEW,
-        ]);
-    } //new
     
     //TODO Поиск с фильтром
     public function scopeNew($query) //Поиск лидов без повторов

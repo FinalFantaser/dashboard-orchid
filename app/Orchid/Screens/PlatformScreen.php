@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Orchid\Layouts\Order\OrderListLayout;
 use App\Services\OrderService;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
@@ -18,9 +19,7 @@ class PlatformScreen extends Screen
     public function __construct(
         private OrderService $service
     )
-    {
-        
-    }
+    {}
 
     /**
      * Query data.
@@ -30,8 +29,14 @@ class PlatformScreen extends Screen
     public function query(): iterable
     {
         return [
-            // 'orders' => Order::filters()->defaultSort('created_at', 'desc')->paginate(10),
             'orders' => $this->service->orderList(),
+        ];
+    }
+
+    public function asyncGetOrder(int $id)
+    {
+        return [
+            'order' => $this->service->findById(id: $id, fail: true),
         ];
     }
 
@@ -74,7 +79,7 @@ class PlatformScreen extends Screen
     public function layout(): iterable
     {
         return [
-            OrderListLayout::class
+            OrderListLayout::class,
         ];
     }
 }

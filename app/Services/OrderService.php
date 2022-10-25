@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Http\Requests\Api\V1\Order\CreateRequest;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class OrderService{
@@ -63,9 +65,9 @@ class OrderService{
         return $fail ? $query->firstOrFail() : $query->first();
     } //findById
 
-    public function findByPhone(string $phone): LengthAwarePaginator
+    public function findByPhone(string $phone): Collection
     {
-        return $this->query->where('name', $phone)->paginate(self::PER_PAGE);
+        return $this->query()->where('phone', $phone)->get();
     } //findByName
 
     /**
@@ -81,13 +83,18 @@ class OrderService{
         ->paginate(self::PER_PAGE);
     } //orderList
 
+    public function leadAdd(CreateRequest $request): Order
+    {
+        return $this->create(name: $request->name, phone: $request->phone);
+    } //leadAdd
+
     /**
      *      Другие методы
      */
-    public function makeAllNew(): void //Выставить всем лидам статус на new
+    public function resetStatuses(): void //Вернуть всем лидам статус на new
     {
         $this->query()->where(column: 'status', operator: '!=', value: Order::STATUS_NEW)
-            ->lazyById(chunkSize: 500, column: 'id')
+            ->lazyById()
             ->each->update(['status' => Order::STATUS_NEW]);
     } //makeAllNew
 };
