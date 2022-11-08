@@ -28,7 +28,10 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            //
+            
+            Menu::make('Настройки')
+                ->route('platform.settings')
+                ->icon('settings'),
         ];
     }
 
