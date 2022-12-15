@@ -29,6 +29,12 @@ class CreateRequest extends FormRequest
         return [
             'name' => 'required|min:3',
             'phone' => 'required|regex:/^\d(\d{3})(\d{3})(\d{4})$/',
+            'host' => 'nullable',
+            'city' => 'nullable',
+            'cost' => 'nullable',
+            'comment' => 'nullable',
+            'referrer' => 'nullable',
+            'url_query_string' => 'nullable',
         ];
     } //rules
 

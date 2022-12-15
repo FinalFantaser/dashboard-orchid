@@ -36,6 +36,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.settings')
                 ->icon('settings'),
 
+            Menu::make('Интеграция')
+                ->route('platform.integration')
+                ->icon('share'),
+
         ];
     }
 

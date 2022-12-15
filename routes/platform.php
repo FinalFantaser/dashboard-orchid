@@ -9,6 +9,7 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\IntegrationScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -34,7 +35,11 @@ use Tabuna\Breadcrumbs\Trail;
 Route::screen('/main', PlatformScreen::class)
     ->name('platform.main');
 
+//Настройки
 Route::screen('/settings', SettingsScreen::class)->name('platform.settings');
+
+//Интеграция
+Route::screen('/integrations', IntegrationScreen::class)->name('platform.integration');
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)

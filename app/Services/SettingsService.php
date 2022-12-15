@@ -23,6 +23,10 @@ class SettingsService{ //Класс является синглтоном
         'email_from_name' => 'Турция квартиры',
         'email_to_address' => '<email_receiver>', //Адрес, на который приходит уведомление
         'email_subject' => 'Новая заявка!',
+
+        'crm_enabled' => false,
+        'crm_url' => 'https://in.leads-hunter.com/api/v1/lead.add',
+        'project_token' => '',
     ];
 
     private $_file;
